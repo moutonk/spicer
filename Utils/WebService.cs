@@ -6,7 +6,6 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Windows.Media.Imaging;
-using Spicer;
 
 namespace Utils
 {
@@ -38,15 +37,13 @@ namespace Utils
         {
             public readonly HttpRequestType HttpReqType;
             public readonly RequestType ReqType;
-            public readonly SyncType SyncType;
             public readonly Dictionary<string, string> Args;
             public readonly Dictionary<string, string> Header;
 
-            public RequestObject(HttpRequestType httpReqType, RequestType reqType, SyncType syncType, Dictionary<string, string> args, Dictionary<string, string> header)
+            public RequestObject(HttpRequestType httpReqType, RequestType reqType, Dictionary<string, string> args, Dictionary<string, string> header)
             {
                 this.HttpReqType = httpReqType;
                 this.ReqType = reqType;
-                this.SyncType = syncType;
                 this.Args = args;
                 this.Header = header;
             }
@@ -70,11 +67,11 @@ namespace Utils
             }
         }
 
-        public static void SendRequest(HttpRequestType httpReqType, RequestType reqType, SyncType syncType, Dictionary<string, string> args, Dictionary<string, string> header)
+        public static void SendRequest(HttpRequestType httpReqType, RequestType reqType,  Dictionary<string, string> args, Dictionary<string, string> header)
         {
             if (OnGoingRequest == true)
             {
-                requestQueue.Enqueue(new RequestObject(httpReqType, reqType, syncType, args, header));
+                requestQueue.Enqueue(new RequestObject(httpReqType, reqType, args, header));
                 return;
             }
 
@@ -82,11 +79,11 @@ namespace Utils
             Data.NetworkProblem = false;
 
             //Debug output
-            Logs.Output.ShowOutput(Environment.NewLine + "SendRequest: " + httpReqType + " " + reqType + " " + syncType + " " + args.Aggregate("",(current, keyValuePair) =>current + ("[" + keyValuePair.Key + " " + keyValuePair.Value + "]")));
+            Logs.Output.ShowOutput(Environment.NewLine + "SendRequest: " + httpReqType + " " + reqType + " " + args.Aggregate("",(current, keyValuePair) =>current + ("[" + keyValuePair.Key + " " + keyValuePair.Value + "]")));
 
             //convert the dictionnary to a string
             var dicoToString = FormateDictionnaryToString(args);
-            //Logs.Output.ShowOutput("DicoToStr: " + dicoToString);
+            Logs.Output.ShowOutput("DicoToStr: " + dicoToString);
 
             //create the request with the correct URL
             var url = Paths.ServerAddress + RequestTypeToUrlString(reqType);
@@ -170,7 +167,7 @@ namespace Utils
             if (requestQueue.Count >= 1)
             {
                 var req = requestQueue.Dequeue();
-                SendRequest(req.HttpReqType, req.ReqType, req.SyncType, req.Args, req.Header);
+                SendRequest(req.HttpReqType, req.ReqType, req.Args, req.Header);
             }
         }
 

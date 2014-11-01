@@ -7,7 +7,7 @@ namespace Utils
     {
         static Connectivity()
         {
-            DeviceNetworkInformation.NetworkAvailabilityChanged += new EventHandler<NetworkNotificationEventArgs>(ChangeDetected);
+            DeviceNetworkInformation.NetworkAvailabilityChanged += ChangeDetected;
         }
 
         public static  void ShowConnectivity()
@@ -19,7 +19,7 @@ namespace Utils
 
         static void ChangeDetected(object sender, NetworkNotificationEventArgs e)
         {
-            string change = string.Empty;
+            string change;
 
             switch (e.NotificationType)
             {
@@ -37,11 +37,11 @@ namespace Utils
                     break;
             }
 
-            string changeInformation = String.Format(" {0} {1} {2} ({3})",
-                        DateTime.Now.ToString(), change, e.NetworkInterface.InterfaceName,
-                        e.NetworkInterface.InterfaceType.ToString());
+            var changeInformation = String.Format(" {0} {1} {2} ({3})",
+                        DateTime.Now, change, e.NetworkInterface.InterfaceName,
+                        e.NetworkInterface.InterfaceType);
 
-            Logs.Output.ShowOutput(changeInformation);
+            Logs.Output.ShowOutput(change + changeInformation);
         }
     }
 }

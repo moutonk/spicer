@@ -1,10 +1,9 @@
 ﻿using System;
 
-namespace Spicer
+namespace Utils
 {
     class Paths
     {
-        public static readonly string SettingsPathString = "/View/PMSettingsView.xaml";
         public static readonly string CurrentUserProfilPathString = "/View/PMCurrentUserProfilView.xaml";
         public static readonly string ServerAddress = "162";
 

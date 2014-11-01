@@ -1,17 +1,12 @@
 ﻿using System;
 using Microsoft.Phone.Notification;
-using Utils;
 
-namespace Spicer
+namespace Utils
 {
     public static class NotificationCenter
     {
         public enum NotificationType
         {
-            NewComment = 0,
-            PinModified,
-            NewGrade,
-            NewFavorite
         }
 
         /// Holds the push channel that is created or found.
@@ -36,12 +31,12 @@ namespace Spicer
                 PushChannel = new HttpNotificationChannel(ChannelName);
                 
                 // Register for all the events before attempting to open the channel.
-                PushChannel.ChannelUriUpdated += new EventHandler<NotificationChannelUriEventArgs>(PushChannel_ChannelUriUpdated);
-                PushChannel.ErrorOccurred += new EventHandler<NotificationChannelErrorEventArgs>(PushChannel_ErrorOccurred);
+                PushChannel.ChannelUriUpdated += PushChannel_ChannelUriUpdated;
+                PushChannel.ErrorOccurred += PushChannel_ErrorOccurred;
 
                 // Register for this notification only if you need to receive the notifications while your application is running.
                 //PushChannel.ShellToastNotificationReceived += new EventHandler<NotificationEventArgs>(PushChannel_ShellToastNotificationReceived);
-                PushChannel.ShellToastNotificationReceived += new EventHandler<NotificationEventArgs>(PushChannel_ShellToastNotificationReceived);
+                PushChannel.ShellToastNotificationReceived += PushChannel_ShellToastNotificationReceived;
 
                 PushChannel.Open();
 
@@ -52,16 +47,16 @@ namespace Spicer
             else
             {
                 // The channel was already open, so just register for all the events.
-                PushChannel.ChannelUriUpdated += new EventHandler<NotificationChannelUriEventArgs>(PushChannel_ChannelUriUpdated);
-                PushChannel.ErrorOccurred += new EventHandler<NotificationChannelErrorEventArgs>(PushChannel_ErrorOccurred);
+                PushChannel.ChannelUriUpdated += PushChannel_ChannelUriUpdated;
+                PushChannel.ErrorOccurred += PushChannel_ErrorOccurred;
 
                 // Register for this notification only if you need to receive the notifications while your application is running.
-                PushChannel.ShellToastNotificationReceived += new EventHandler<NotificationEventArgs>(PushChannel_ShellToastNotificationReceived);
+                PushChannel.ShellToastNotificationReceived += PushChannel_ShellToastNotificationReceived;
           
                 PushChannelUri = PushChannel.ChannelUri.ToString();
              
                 // Display the URI for testing purposes. Normally, the URI would be passed back to your web service at this point.
-                Logs.Output.ShowOutput(String.Format("Channel Uri is {0}", PushChannel.ChannelUri.ToString()));
+                Logs.Output.ShowOutput(String.Format("Channel Uri is {0}", PushChannel.ChannelUri));
             }
             Logs.Output.ShowOutput("NotificationCenter constructor end");
         }
@@ -76,10 +71,9 @@ namespace Spicer
             {
                 Logs.Output.ShowOutput(exp.Message + " " + exp.InnerException);
             }
-            // Display the new URI for testing purposes.   Normally, the URI would be passed back to your web service at this point.
-            Logs.Output.ShowOutput("ChannelUri: " + e.ChannelUri.ToString());
+       
+            Logs.Output.ShowOutput("ChannelUri: " + e.ChannelUri);
             Logs.Output.ShowOutput("PushChannelUri: " + PushChannelUri);
-         
         }
 
         static void PushChannel_ErrorOccurred(object sender, NotificationChannelErrorEventArgs e)
@@ -90,7 +84,7 @@ namespace Spicer
 
         static void PushChannel_ShellToastNotificationReceived(object sender, NotificationEventArgs e)
         {
-            Logs.Output.ShowOutput("Notification received: " + DateTime.Now.TimeOfDay.ToString());
+            Logs.Output.ShowOutput("Notification received: " + DateTime.Now.TimeOfDay);
         }
     }
 }

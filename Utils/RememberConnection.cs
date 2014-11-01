@@ -1,8 +1,7 @@
 ﻿using System;
 using System.IO.IsolatedStorage;
-using Utils;
 
-namespace Spicer
+namespace Utils
 {
     class RememberConnection
     {

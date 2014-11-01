@@ -1,18 +1,14 @@
 ﻿using System;
 using Windows.Devices.Geolocation;
-using Utils;
 
-namespace PinMessaging.Other
+namespace Utils
 {
-    public class PMGeoLocation
+    public class GeoLocation
     {
         public Geoposition GeopositionUser = null;
-
         readonly Geolocator _geolocatorUser = new Geolocator();
-        bool _firstPositionChanged = false;
-        private bool _firstUpdateLocationOver = false;
 
-        public PMGeoLocation()
+        public GeoLocation()
         {
             _geolocatorUser.DesiredAccuracyInMeters = 1;
             _geolocatorUser.MovementThreshold = 0;
