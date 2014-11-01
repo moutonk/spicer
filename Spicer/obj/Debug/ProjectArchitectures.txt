@@ -1,0 +1,2 @@
+c:\users\mouton_k\documents\visual studio 2013\Projects\Spicer\Spicer\Spicer.csproj;neutral
+c:\users\mouton_k\documents\visual studio 2013\Projects\Spicer\Utils\Utils.csproj;neutral

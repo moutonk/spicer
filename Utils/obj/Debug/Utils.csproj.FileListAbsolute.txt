@@ -1,0 +1,4 @@
+c:\Users\mouton_k\documents\visual studio 2013\Projects\Spicer\Utils\Bin\Debug\Utils.dll
+c:\Users\mouton_k\documents\visual studio 2013\Projects\Spicer\Utils\Bin\Debug\Utils.pdb
+c:\Users\mouton_k\documents\visual studio 2013\Projects\Spicer\Utils\obj\Debug\Utils.dll
+c:\Users\mouton_k\documents\visual studio 2013\Projects\Spicer\Utils\obj\Debug\Utils.pdb
