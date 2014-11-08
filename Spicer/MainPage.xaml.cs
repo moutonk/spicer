@@ -1,41 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
+using Windows.Web.Http;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using Spicer.Resources;
+using Utils;
 
 namespace Spicer
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        // Constructeur
         public MainPage()
         {
             InitializeComponent();
-
-            // Exemple de code pour la localisation d'ApplicationBar
-            //BuildLocalizedApplicationBar();
         }
 
-        // Exemple de code pour la conception d'une ApplicationBar localisée
-        //private void BuildLocalizedApplicationBar()
-        //{
-        //    // Définit l'ApplicationBar de la page sur une nouvelle instance d'ApplicationBar.
-        //    ApplicationBar = new ApplicationBar();
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            var ws = new WebService();
 
-        //    // Crée un bouton et définit la valeur du texte sur la chaîne localisée issue d'AppResources.
-        //    ApplicationBarIconButton appBarButton = new ApplicationBarIconButton(new Uri("/Assets/AppBar/appbar.add.rest.png", UriKind.Relative));
-        //    appBarButton.Text = AppResources.AppBarButtonText;
-        //    ApplicationBar.Buttons.Add(appBarButton);
-
-        //    // Crée un nouvel élément de menu avec la chaîne localisée d'AppResources.
-        //    ApplicationBarMenuItem appBarMenuItem = new ApplicationBarMenuItem(AppResources.AppBarMenuItemText);
-        //    ApplicationBar.MenuItems.Add(appBarMenuItem);
-        //}
+            ws.SendRequest(HttpMethod.Post, RequestType.Connect, RequestContentType.Text, new Dictionary<string, string>
+            {
+                {"email", "k.k@k.kk"},
+                {"password", "kkkkkk"},
+                {"deviceType", "3"},
+                {"notificationId", "07798707078965569798"}
+            });
+        }
     }
 }

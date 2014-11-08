@@ -16,9 +16,9 @@ namespace Utils
             {
                 switch (currentRequestType)
                 {
-                    case RequestType.ProfilPicture:
-                        //ParseSignIn(json);
-                        break;
+                    //case RequestType.ProfilPicture:
+                    //    //ParseSignIn(json);
+                    //    break;
                 }
             }
             catch (Exception e)

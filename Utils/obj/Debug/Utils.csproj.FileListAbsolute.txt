@@ -2,3 +2,7 @@ c:\Users\mouton_k\documents\visual studio 2013\Projects\Spicer\Utils\Bin\Debug\U
 c:\Users\mouton_k\documents\visual studio 2013\Projects\Spicer\Utils\Bin\Debug\Utils.pdb
 c:\Users\mouton_k\documents\visual studio 2013\Projects\Spicer\Utils\obj\Debug\Utils.dll
 c:\Users\mouton_k\documents\visual studio 2013\Projects\Spicer\Utils\obj\Debug\Utils.pdb
+C:\Users\mouton_k\Documents\GitHub\spicer\Utils\Bin\Debug\Utils.dll
+C:\Users\mouton_k\Documents\GitHub\spicer\Utils\Bin\Debug\Utils.pdb
+C:\Users\mouton_k\Documents\GitHub\spicer\Utils\obj\Debug\Utils.dll
+C:\Users\mouton_k\Documents\GitHub\spicer\Utils\obj\Debug\Utils.pdb
