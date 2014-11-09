@@ -12,7 +12,8 @@ namespace Utils
 {
     public enum RequestType
     {
-        Connect
+        Connect,
+        Couple
     }
 
     public enum RequestContentType
@@ -33,8 +34,11 @@ namespace Utils
             var dicoToString = FormateDictionnaryToString(args);
             var url = Paths.ServerAddress + RequestTypeToUrlString(reqType);
 
+
             if (httpReqType == HttpMethod.Post)
                 PostRequest(ref url, ref dicoToString, reqType, reqContentType);
+            else if (httpReqType == HttpMethod.Put)
+                PutRequest(ref url, ref dicoToString, reqType, reqContentType);
             else if (httpReqType == HttpMethod.Get)
                 GetRequest(ref url, ref dicoToString, reqType, reqContentType);
         }
@@ -44,7 +48,9 @@ namespace Utils
             switch (reqType)
             {
                 case RequestType.Connect:
-                    return "connect.json";
+                    return "user/";
+                case RequestType.Couple:
+                    return "couple/";
                 default:
                     return reqType.ToString();
             }
@@ -55,7 +61,7 @@ namespace Utils
             var request = (HttpWebRequest)WebRequest.Create(url);
 
             Logs.Output.ShowOutput(url + " " + parameters);
-    
+
             _cookieContainer.Add(new Uri(Paths.ServerAddress), _cookieColl);
 
             request.CookieContainer = _cookieContainer;
@@ -89,6 +95,47 @@ namespace Utils
                     break;
             }
         }
+
+        private void PutRequest(ref string url, ref string parameters, RequestType reqType, RequestContentType reqContentType)
+        {
+            var request = (HttpWebRequest)WebRequest.Create(url);
+
+            Logs.Output.ShowOutput(url + " " + parameters);
+
+            _cookieContainer.Add(new Uri(Paths.ServerAddress), _cookieColl);
+
+            request.CookieContainer = _cookieContainer;
+            request.Method = HttpMethod.Put.ToString();
+
+            byte[] requestParams;
+
+            switch (reqContentType)
+            {
+                case RequestContentType.Text:
+                    requestParams = Encoding.UTF8.GetBytes(parameters);
+                    request.ContentType = "application/x-www-form-urlencoded";
+                    request.ContentLength = requestParams.Length;
+                    request.BeginGetRequestStream(new AsyncCallback(WriteParamsInStreamCallBack), Tuple.Create(request, requestParams, reqType));
+
+                    break;
+
+                case RequestContentType.Image:
+                    const string boundary = "---MultiPartHeader---";
+                    var head = Encoding.UTF8.GetBytes(String.Format("--{0}\r\n" + "Content-Disposition: form-data; name=\"file\"; filename=\"profilpic.jpg\"\r\n" + "\r\n", boundary));
+                    var content = Convert.FromBase64String(parameters);
+                    var tail = Encoding.UTF8.GetBytes(String.Format("\r\n" + "--{0}--\r\n", boundary));
+
+                    requestParams = new byte[head.Length + tail.Length + content.Length];
+                    Array.Copy(head, 0, requestParams, 0, head.Length);
+                    Array.Copy(content, 0, requestParams, head.Length, content.Length);
+                    Array.Copy(tail, 0, requestParams, head.Length + content.Length, tail.Length);
+                    request.ContentType = "multipart/form-data; boundary=" + boundary;
+                    //request.ContentLength = content.Length;
+                    request.BeginGetRequestStream(new AsyncCallback(WriteParamsInStreamCallBack), Tuple.Create(request, requestParams, reqType));
+                    break;
+            }
+        }
+
 
         private void GetRequest(ref string url, ref string parameters, RequestType reqType, RequestContentType reqContentType)
         {

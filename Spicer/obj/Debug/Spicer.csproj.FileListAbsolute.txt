@@ -92,6 +92,13 @@ c:\users\mouton_k\documents\visual studio 2013\Projects\Spicer\Spicer\obj\Debug\
 c:\users\mouton_k\documents\visual studio 2013\Projects\Spicer\Spicer\obj\Debug\en-US\Spicer.resources.dll
 c:\users\mouton_k\documents\visual studio 2013\Projects\Spicer\Spicer\Bin\Debug\Utils.dll
 c:\users\mouton_k\documents\visual studio 2013\Projects\Spicer\Spicer\Bin\Debug\Utils.pdb
+C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\Spicer.csprojResolveAssemblyReference.cache
+C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\App.g.cs
+C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\View\Login.g.cs
+C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\Spicer.g.resources
+C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\Spicer.Resources.AppResources.resources
+C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\Spicer.Resources.AppResources.en-US.resources
+C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\Spicer.csproj.GenerateResource.Cache
 C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\Bin\Debug\Assets\ApplicationIcon.png
 C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\Bin\Debug\Assets\Tiles\FlipCycleTileLarge.png
 C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\Bin\Debug\Assets\Tiles\FlipCycleTileMedium.png
@@ -162,13 +169,6 @@ C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\Bin\Debug\uz-Latn-UZ\Microsoft.
 C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\Bin\Debug\vi-VN\Microsoft.Phone.Controls.Toolkit.resources.dll
 C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\Bin\Debug\zh-CN\Microsoft.Phone.Controls.Toolkit.resources.dll
 C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\Bin\Debug\zh-TW\Microsoft.Phone.Controls.Toolkit.resources.dll
-C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\Spicer.csprojResolveAssemblyReference.cache
-C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\App.g.cs
-C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\MainPage.g.cs
-C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\Spicer.g.resources
-C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\Spicer.Resources.AppResources.resources
-C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\Spicer.Resources.AppResources.en-US.resources
-C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\Spicer.csproj.GenerateResource.Cache
 C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\en-US\Spicer.resources.dll
 C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\Spicer.dll
 C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\Spicer.pdb

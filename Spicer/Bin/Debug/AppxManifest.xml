@@ -22,9 +22,9 @@
     <Resource Language="FR-FR" />
   </Resources>
   <Applications>
-    <Application Id="App" Executable="AGHost.exe" EntryPoint="MainPage.xaml">
+    <Application Id="App" Executable="AGHost.exe" EntryPoint="View/Login.xaml">
       <m3:VisualElements DisplayName="Spicer" Square150x150Logo="Assets\SquareTile150x150.png" Square44x44Logo="Assets\Logo.png" Description="Spicer" ForegroundText="light" BackgroundColor="#464646">
-        <m3:DefaultTile Square71x71Logo="Assets\SquareTile71x71.png" />
+        <m3:DefaultTile Square71x71Logo="Assets\SquareTile71x71.png"></m3:DefaultTile>
         <m3:SplashScreen Image="Assets\SplashScreen.png" />
       </m3:VisualElements>
       <Extensions>
@@ -36,7 +36,6 @@
       </Extensions>
     </Application>
   </Applications>
-  <Capabilities></Capabilities>
   <Extensions>
     <Extension Category="windows.activatableClass.inProcessServer">
       <InProcessServer>
