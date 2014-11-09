@@ -16,11 +16,11 @@ namespace Spicer.Model
 
     public static class ServiceLogin
     {
+        public static WebService Ws = new WebService();
+
         public static void LoginGo(string username, string password)
         {
-            var ws = new WebService();
-
-            ws.SendRequest(HttpMethod.Put, RequestType.Connect, RequestContentType.Text, new Dictionary<string, string>
+            Ws.SendRequest(HttpMethod.Put, RequestType.Connect, RequestContentType.Text, new Dictionary<string, string>
             {
                 {"username", username},
                 {"password", password}

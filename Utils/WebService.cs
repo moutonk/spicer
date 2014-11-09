@@ -5,7 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
+using Windows.Foundation;
 using Windows.Web.Http;
 
 namespace Utils
@@ -24,8 +26,16 @@ namespace Utils
 
     public class WebService
     {
-        private  CookieCollection _cookieColl = new CookieCollection();
-        private  readonly CookieContainer _cookieContainer = new CookieContainer();
+        private CookieCollection _cookieColl = new CookieCollection();
+        private readonly CookieContainer _cookieContainer = new CookieContainer();
+        public string Result { get; private set; }
+        public bool IsRequestOver { get; private set; }
+
+        public WebService()
+        {
+            Result = null;
+            IsRequestOver = false;
+        }
 
         public void SendRequest(HttpMethod httpReqType, RequestType reqType, RequestContentType reqContentType, Dictionary<string, string> args)
         {
@@ -34,11 +44,10 @@ namespace Utils
             var dicoToString = FormateDictionnaryToString(args);
             var url = Paths.ServerAddress + RequestTypeToUrlString(reqType);
 
-
             if (httpReqType == HttpMethod.Post)
-                PostRequest(ref url, ref dicoToString, reqType, reqContentType);
+                PostPutRequest(ref url, ref dicoToString, HttpMethod.Post, reqType, reqContentType);
             else if (httpReqType == HttpMethod.Put)
-                PutRequest(ref url, ref dicoToString, reqType, reqContentType);
+                PostPutRequest(ref url, ref dicoToString, HttpMethod.Put, reqType, reqContentType);
             else if (httpReqType == HttpMethod.Get)
                 GetRequest(ref url, ref dicoToString, reqType, reqContentType);
         }
@@ -56,7 +65,7 @@ namespace Utils
             }
         }
 
-        private void PostRequest(ref string url, ref string parameters, RequestType reqType, RequestContentType reqContentType)
+        private void PostPutRequest(ref string url, ref string parameters, IStringable crud, RequestType reqType, RequestContentType reqContentType)
         {
             var request = (HttpWebRequest)WebRequest.Create(url);
 
@@ -65,9 +74,9 @@ namespace Utils
             _cookieContainer.Add(new Uri(Paths.ServerAddress), _cookieColl);
 
             request.CookieContainer = _cookieContainer;
-            request.Method = HttpMethod.Post.ToString();
+            request.Method = crud.ToString();
 
-            byte[] requestParams;
+            byte[] requestParams = null;
 
             switch (reqContentType)
             {
@@ -75,8 +84,6 @@ namespace Utils
                     requestParams = Encoding.UTF8.GetBytes(parameters);
                     request.ContentType = "application/x-www-form-urlencoded";
                     request.ContentLength = requestParams.Length;
-                    request.BeginGetRequestStream(new AsyncCallback(WriteParamsInStreamCallBack), Tuple.Create(request, requestParams, reqType));
-
                     break;
 
                 case RequestContentType.Image:
@@ -91,51 +98,10 @@ namespace Utils
                     Array.Copy(tail, 0, requestParams, head.Length + content.Length, tail.Length);
                     request.ContentType = "multipart/form-data; boundary=" + boundary;
                     //request.ContentLength = content.Length;
-                    request.BeginGetRequestStream(new AsyncCallback(WriteParamsInStreamCallBack), Tuple.Create(request, requestParams, reqType));
                     break;
             }
+            request.BeginGetRequestStream(new AsyncCallback(WriteParamsInStreamCallBack), Tuple.Create(request, requestParams, reqType));
         }
-
-        private void PutRequest(ref string url, ref string parameters, RequestType reqType, RequestContentType reqContentType)
-        {
-            var request = (HttpWebRequest)WebRequest.Create(url);
-
-            Logs.Output.ShowOutput(url + " " + parameters);
-
-            _cookieContainer.Add(new Uri(Paths.ServerAddress), _cookieColl);
-
-            request.CookieContainer = _cookieContainer;
-            request.Method = HttpMethod.Put.ToString();
-
-            byte[] requestParams;
-
-            switch (reqContentType)
-            {
-                case RequestContentType.Text:
-                    requestParams = Encoding.UTF8.GetBytes(parameters);
-                    request.ContentType = "application/x-www-form-urlencoded";
-                    request.ContentLength = requestParams.Length;
-                    request.BeginGetRequestStream(new AsyncCallback(WriteParamsInStreamCallBack), Tuple.Create(request, requestParams, reqType));
-
-                    break;
-
-                case RequestContentType.Image:
-                    const string boundary = "---MultiPartHeader---";
-                    var head = Encoding.UTF8.GetBytes(String.Format("--{0}\r\n" + "Content-Disposition: form-data; name=\"file\"; filename=\"profilpic.jpg\"\r\n" + "\r\n", boundary));
-                    var content = Convert.FromBase64String(parameters);
-                    var tail = Encoding.UTF8.GetBytes(String.Format("\r\n" + "--{0}--\r\n", boundary));
-
-                    requestParams = new byte[head.Length + tail.Length + content.Length];
-                    Array.Copy(head, 0, requestParams, 0, head.Length);
-                    Array.Copy(content, 0, requestParams, head.Length, content.Length);
-                    Array.Copy(tail, 0, requestParams, head.Length + content.Length, tail.Length);
-                    request.ContentType = "multipart/form-data; boundary=" + boundary;
-                    //request.ContentLength = content.Length;
-                    request.BeginGetRequestStream(new AsyncCallback(WriteParamsInStreamCallBack), Tuple.Create(request, requestParams, reqType));
-                    break;
-            }
-        }
-
 
         private void GetRequest(ref string url, ref string parameters, RequestType reqType, RequestContentType reqContentType)
         {
@@ -222,6 +188,9 @@ namespace Utils
                         ShowCookiesInfos(response);
 
                     Logs.Output.ShowOutput("Answer: " + responseString);
+
+                    Result = responseString;
+
                     //DataConverter.ParseJson(responseString, (RequestType) tuple.Item3);
                 }
             }
@@ -230,6 +199,7 @@ namespace Utils
                 ManageResponseExplicitError(e);
             }
             Logs.Output.ShowOutput("Waiting answer END...");
+            IsRequestOver = true;
         }
 
         private void ManageResponseExplicitError(WebException e)
