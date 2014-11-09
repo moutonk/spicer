@@ -1,11 +1,9 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Utils;
 
 namespace Spicer.ViewModel
 {
-    class ViewModelBase : WebServiceEndDetector
+    public class ViewModelBase
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -22,10 +20,6 @@ namespace Spicer.ViewModel
             variable = valeur;
             NotifyPropertyChanged(nomPropriete);
             return true;
-        }
-
-        protected override void waitEnd_Tick(object sender, EventArgs e)
-        {
         }
     }
 }

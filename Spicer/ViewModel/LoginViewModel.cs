@@ -1,11 +1,9 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using Spicer.Model;
-using Utils;
 
 namespace Spicer.ViewModel
 {
-    class LoginViewModel : ViewModelBase, INotifyPropertyChanged
+    public class LoginViewModel : ViewModelBase, INotifyPropertyChanged
     {
         private readonly Login _loginModel = new Login();
 
@@ -33,21 +31,8 @@ namespace Spicer.ViewModel
 
         public void LoginGo()
         {
-            ServiceLogin.LoginGo(_username, _password);
-            StartTimer();
-        }
-
-        protected override void waitEnd_Tick(object sender, EventArgs e)
-        {
-            if (ServiceLogin.Ws.IsRequestOver == true)
-            {
-                StopTimer();
-                Logs.Output.ShowOutput("REPONSE!");
-            }
-            else
-            {
-                Logs.Output.ShowOutput("PAS REPONSE!");
-            }
+            var wsLogin = new ServiceLogin(this);
+            wsLogin.LoginGo(_username, _password);
         }
     }
 }

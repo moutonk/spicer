@@ -1,7 +1,7 @@
-﻿<xapCache source="C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\Bin\Debug\Spicer_Debug_AnyCPU.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="11/9/2014 5:06:55 PM">
+﻿<xapCache source="C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\Bin\Debug\Spicer_Debug_AnyCPU.xap" wasSigned="False" wasTritonized="False" certificateThumbprint="" TimeStampUrl="" signKeyFile="" signKeyPassword="" lastWriteTime="11/9/2014 9:42:38 PM">
   <file source="C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\Bin\Debug\resources.pri" archivePath="resources.pri" lastWriteTime="11/9/2014 12:49:40 PM" />
-  <file source="C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\Spicer.dll" archivePath="Spicer.dll" lastWriteTime="11/9/2014 5:06:53 PM" />
-  <file source="C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\en-US\Spicer.resources.dll" archivePath="en-US\Spicer.resources.dll" lastWriteTime="11/9/2014 5:06:53 PM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\Spicer.dll" archivePath="Spicer.dll" lastWriteTime="11/9/2014 9:42:36 PM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\en-US\Spicer.resources.dll" archivePath="en-US\Spicer.resources.dll" lastWriteTime="11/9/2014 9:42:36 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\Assets\AlignmentGrid.png" archivePath="Assets\AlignmentGrid.png" lastWriteTime="11/1/2014 12:34:16 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\Assets\BadgeLogo.png" archivePath="Assets\BadgeLogo.png" lastWriteTime="11/1/2014 12:34:16 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\Assets\Logo.png" archivePath="Assets\Logo.png" lastWriteTime="11/1/2014 12:34:16 PM" />
@@ -19,9 +19,9 @@
   <file source="C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\Bin\Debug\Assets\Tiles\FlipCycleTileMedium.png" archivePath="Assets\Tiles\FlipCycleTileMedium.png" lastWriteTime="11/1/2014 12:34:16 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\spicer\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll" archivePath="Microsoft.Phone.Controls.Toolkit.dll" lastWriteTime="11/1/2014 12:43:45 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\spicer\packages\Newtonsoft.Json.6.0.6\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll" archivePath="Newtonsoft.Json.dll" lastWriteTime="11/1/2014 12:42:15 PM" />
-  <file source="C:\Users\mouton_k\Documents\GitHub\spicer\Utils\Bin\Debug\Utils.dll" archivePath="Utils.dll" lastWriteTime="11/9/2014 5:06:51 PM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\spicer\Utils\Bin\Debug\Utils.dll" archivePath="Utils.dll" lastWriteTime="11/9/2014 9:13:21 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\spicer\packages\Newtonsoft.Json.6.0.6\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.xml" archivePath="Newtonsoft.Json.xml" lastWriteTime="11/1/2014 12:42:15 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\Bin\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="11/9/2014 11:28:41 AM" />
-  <file source="C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\MDILProjectFiles.xml" archivePath="MDILProjectFiles.xml" lastWriteTime="11/9/2014 5:06:54 PM" />
+  <file source="C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\MDILProjectFiles.xml" archivePath="MDILProjectFiles.xml" lastWriteTime="11/9/2014 9:42:38 PM" />
   <file source="C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\Bin\Debug\AppxManifest.xml" archivePath="AppxManifest.xml" lastWriteTime="11/9/2014 12:49:41 PM" />
 </xapCache>
