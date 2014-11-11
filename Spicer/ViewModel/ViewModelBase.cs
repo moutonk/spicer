@@ -1,8 +1,16 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Utils;
 
 namespace Spicer.ViewModel
 {
+    public class Argument
+    {
+        public string PropertyName { get; set; }
+        public object PropertyValue { get; set; }
+    }
+
     public class ViewModelBase
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -19,6 +27,20 @@ namespace Spicer.ViewModel
 
             variable = valeur;
             NotifyPropertyChanged(nomPropriete);
+            return true;
+        }
+
+        protected bool UpdateFields(object childClass, Argument[] args)
+        {
+            try
+            {
+                foreach (var arg in args)
+                    childClass.GetType().GetProperty(arg.PropertyName).SetValue(this, arg.PropertyValue);
+            }
+            catch (Exception exp)
+            {
+                Logs.Error.ShowError("GetProperty: unknown property");
+            }
             return true;
         }
     }

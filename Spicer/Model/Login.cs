@@ -15,11 +15,11 @@ namespace Spicer.Model
     public class ServiceLogin : WebServiceEndDetector
     {
         private readonly WebService _ws = new WebService();
-        private readonly LoginViewModel _vm;
+        private readonly Func<Argument[], bool> _updateViewModel;
 
-        public ServiceLogin(LoginViewModel vm)
+        public ServiceLogin(Func<Argument[], bool> updateViewModel)
         {
-            _vm = vm;
+            _updateViewModel = updateViewModel;
         }
 
         public void LoginGo(string username, string password)
@@ -38,6 +38,8 @@ namespace Spicer.Model
             {
                 StopTimer();
                 Logs.Output.ShowOutput("REPONSE!: " + _ws.Result);
+                _updateViewModel(new[] { new Argument {PropertyName = "Username", PropertyValue = "lol"},
+                                         new Argument {PropertyName = "Password", PropertyValue = "mdr"}});
             }
             else
             {

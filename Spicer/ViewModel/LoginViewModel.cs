@@ -1,5 +1,9 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
 using Spicer.Model;
+using Utils;
 
 namespace Spicer.ViewModel
 {
@@ -29,9 +33,15 @@ namespace Spicer.ViewModel
             }
         }
 
+        private bool UpdateFields(Argument[] args)
+        {
+            base.UpdateFields(this, args);
+            return true;
+        }
+
         public void LoginGo()
         {
-            var wsLogin = new ServiceLogin(this);
+            var wsLogin = new ServiceLogin(UpdateFields);
             wsLogin.LoginGo(_username, _password);
         }
     }
