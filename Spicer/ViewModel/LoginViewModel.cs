@@ -1,15 +1,11 @@
-﻿using System;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
+﻿using System.ComponentModel;
 using Spicer.Model;
-using Utils;
 
 namespace Spicer.ViewModel
 {
-    public class LoginViewModel : ViewModelBase, INotifyPropertyChanged
+    public sealed class LoginViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        private readonly Login _loginModel = new Login();
+        private readonly User _userModel = new User();
 
         private string _username;
         public string Username
@@ -18,7 +14,7 @@ namespace Spicer.ViewModel
             set
             {
                 NotifyPropertyChanged(ref _username, value);
-                _loginModel.Username = _username;
+                _userModel.Username = _username;
             }
         }
 
@@ -29,19 +25,13 @@ namespace Spicer.ViewModel
             set
             {
                 NotifyPropertyChanged(ref _password, value);
-                _loginModel.Password = _password;
+                _userModel.Password = _password;
             }
-        }
-
-        private bool UpdateFields(Argument[] args)
-        {
-            base.UpdateFields(this, args);
-            return true;
         }
 
         public void LoginGo()
         {
-            var wsLogin = new ServiceLogin(UpdateFields);
+            var wsLogin = new ServiceUser(this);
             wsLogin.LoginGo(_username, _password);
         }
     }

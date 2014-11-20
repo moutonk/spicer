@@ -94,7 +94,6 @@ c:\users\mouton_k\documents\visual studio 2013\Projects\Spicer\Spicer\Bin\Debug\
 c:\users\mouton_k\documents\visual studio 2013\Projects\Spicer\Spicer\Bin\Debug\Utils.pdb
 C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\Spicer.csprojResolveAssemblyReference.cache
 C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\App.g.cs
-C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\View\Login.g.cs
 C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\Spicer.g.resources
 C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\Spicer.Resources.AppResources.resources
 C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\Spicer.Resources.AppResources.en-US.resources
@@ -186,3 +185,4 @@ C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\MultipleQualifiersPer
 C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\ProjectArchitectures.txt
 C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\MDILProjectFiles.xml
 C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\XapCacheFile.xml
+C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\View\StartPage.g.cs

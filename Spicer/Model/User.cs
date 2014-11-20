@@ -6,25 +6,25 @@ using Utils;
 
 namespace Spicer.Model
 {
-    public class Login
+    public sealed class User
     {
         public string Username {get; set; }
         public string Password {get; set; }
     }
 
-    public class ServiceLogin : WebServiceEndDetector
+    public class ServiceUser : WebServiceEndDetector
     {
         private readonly WebService _ws = new WebService();
-        private readonly Func<Argument[], bool> _updateViewModel;
+        private readonly LoginViewModel _vm;
 
-        public ServiceLogin(Func<Argument[], bool> updateViewModel)
+        public ServiceUser(LoginViewModel vm)
         {
-            _updateViewModel = updateViewModel;
+            _vm = vm;
         }
 
         public void LoginGo(string username, string password)
         {
-            _ws.SendRequest(HttpMethod.Put, RequestType.Connect, RequestContentType.Text, new Dictionary<string, string>
+            _ws.SendRequest(HttpMethod.Put, RequestType.User, RequestContentType.Text, new Dictionary<string, string>
             {
                 {"username", username},
                 {"password", password}
@@ -38,8 +38,9 @@ namespace Spicer.Model
             {
                 StopTimer();
                 Logs.Output.ShowOutput("REPONSE!: " + _ws.Result);
-                _updateViewModel(new[] { new Argument {PropertyName = "Username", PropertyValue = "lol"},
-                                         new Argument {PropertyName = "Password", PropertyValue = "mdr"}});
+
+                //_vm.Username = "titi";
+                //_vm.Password = "dsqdqsfsqf";
             }
             else
             {

@@ -14,8 +14,8 @@ namespace Utils
 {
     public enum RequestType
     {
-        Connect,
-        Couple
+        Couple,
+        User
     }
 
     public enum RequestContentType
@@ -31,6 +31,10 @@ namespace Utils
         public string Result { get; private set; }
         public bool IsRequestOver { get; private set; }
 
+        public RequestType ReqType { get; set; }
+        public RequestContentType ReqContentType { get; set; }
+        public HttpMethod HttpReqType { get; set; }
+
         public WebService()
         {
             Result = null;
@@ -39,24 +43,28 @@ namespace Utils
 
         public void SendRequest(HttpMethod httpReqType, RequestType reqType, RequestContentType reqContentType, Dictionary<string, string> args)
         {
+            ReqType = reqType;
+            ReqContentType = reqContentType;
+            HttpReqType = httpReqType;
+
             Logs.Output.ShowOutput(Environment.NewLine + "SendRequest: " + httpReqType + " " + reqType + " " + args.Aggregate("",(current, keyValuePair) =>current + ("[" + keyValuePair.Key + " " + keyValuePair.Value + "]")));
             
             var dicoToString = FormateDictionnaryToString(args);
             var url = Paths.ServerAddress + RequestTypeToUrlString(reqType);
 
             if (httpReqType == HttpMethod.Post)
-                PostPutRequest(ref url, ref dicoToString, HttpMethod.Post, reqType, reqContentType);
+                PostPutRequest(ref url, ref dicoToString);
             else if (httpReqType == HttpMethod.Put)
-                PostPutRequest(ref url, ref dicoToString, HttpMethod.Put, reqType, reqContentType);
+                PostPutRequest(ref url, ref dicoToString);
             else if (httpReqType == HttpMethod.Get)
-                GetRequest(ref url, ref dicoToString, reqType, reqContentType);
+                GetRequest(ref url, ref dicoToString);
         }
      
         private static string RequestTypeToUrlString(RequestType reqType)
         {
             switch (reqType)
             {
-                case RequestType.Connect:
+                case RequestType.User:
                     return "user/";
                 case RequestType.Couple:
                     return "couple/";
@@ -65,7 +73,7 @@ namespace Utils
             }
         }
 
-        private void PostPutRequest(ref string url, ref string parameters, IStringable crud, RequestType reqType, RequestContentType reqContentType)
+        private void PostPutRequest(ref string url, ref string parameters)
         {
             var request = (HttpWebRequest)WebRequest.Create(url);
 
@@ -74,11 +82,11 @@ namespace Utils
             _cookieContainer.Add(new Uri(Paths.ServerAddress), _cookieColl);
 
             request.CookieContainer = _cookieContainer;
-            request.Method = crud.ToString();
+            request.Method = HttpReqType.ToString();
 
             byte[] requestParams = null;
 
-            switch (reqContentType)
+            switch (ReqContentType)
             {
                 case RequestContentType.Text:
                     requestParams = Encoding.UTF8.GetBytes(parameters);
@@ -100,10 +108,10 @@ namespace Utils
                     //request.ContentLength = content.Length;
                     break;
             }
-            request.BeginGetRequestStream(new AsyncCallback(WriteParamsInStreamCallBack), Tuple.Create(request, requestParams, reqType));
+            request.BeginGetRequestStream(new AsyncCallback(WriteParamsInStreamCallBack), Tuple.Create(request, requestParams));
         }
 
-        private void GetRequest(ref string url, ref string parameters, RequestType reqType, RequestContentType reqContentType)
+        private void GetRequest(ref string url, ref string parameters)
         {
             var request = (HttpWebRequest)WebRequest.Create(url + "?" + parameters);
 
@@ -113,13 +121,13 @@ namespace Utils
             Logs.Output.ShowOutput(url + "?" + parameters);
             request.Method = HttpMethod.Get.ToString();
 
-            request.BeginGetResponse(new AsyncCallback(ManageResponse), Tuple.Create(request, new byte[1], reqType));
+            request.BeginGetResponse(new AsyncCallback(ManageResponse), Tuple.Create(request, new byte[1]));
         }
 
         private void WriteParamsInStreamCallBack(IAsyncResult ar)
         {
             Logs.Output.ShowOutput("Writing request BEGIN...");
-            var tuple = (Tuple<HttpWebRequest, byte[], RequestType>)ar.AsyncState;
+            var tuple = (Tuple<HttpWebRequest, byte[]>)ar.AsyncState;
 
             using (var postStream = tuple.Item1.EndGetRequestStream(ar))
             {
@@ -173,7 +181,7 @@ namespace Utils
         private void ManageResponse(IAsyncResult ar)
         {
             Logs.Output.ShowOutput("Waiting answer BEGIN...");
-            var tuple = (Tuple<HttpWebRequest, byte[], RequestType>)ar.AsyncState;
+            var tuple = (Tuple<HttpWebRequest, byte[]>)ar.AsyncState;
 
             try
             {
