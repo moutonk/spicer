@@ -1,13 +1,10 @@
-﻿using System.ComponentModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
-using Windows.Foundation;
 using Windows.Web.Http;
 
 namespace Utils
@@ -24,12 +21,19 @@ namespace Utils
         Image
     }
 
+    public class WebServiceError
+    {
+        public System.Net.HttpStatusCode? ErrorCode { get; set; }
+        public string CodeDescription { get; set; }
+    }
+
     public class WebService
     {
         private CookieCollection _cookieColl = new CookieCollection();
         private readonly CookieContainer _cookieContainer = new CookieContainer();
         public string Result { get; private set; }
         public bool IsRequestOver { get; private set; }
+        public WebServiceError Error = new WebServiceError {ErrorCode = null};
 
         public RequestType ReqType { get; set; }
         public RequestContentType ReqContentType { get; set; }
@@ -218,6 +222,8 @@ namespace Utils
             if (aResp != null)
             {
                 Logs.Output.ShowOutput("statusCode: " + (int)aResp.StatusCode);
+                Error.ErrorCode = aResp.StatusCode;
+                Error.CodeDescription = aResp.StatusDescription;
                 using (var reader = new StreamReader(aResp.GetResponseStream()))
                 {
                     Logs.Output.ShowOutput(reader.ReadToEnd());

@@ -186,3 +186,5 @@ C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\ProjectArchitectures.
 C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\MDILProjectFiles.xml
 C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\XapCacheFile.xml
 C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\View\StartPage.g.cs
+C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\View\LoginView.g.cs
+C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\View\SignUp.g.cs

@@ -40,20 +40,6 @@
             attributs du fichier .resx qui correspond à la valeur
             CurrentUICulture de l'application au moment de l'exécution.
          -->
-       
-        <StackPanel x:Name="TitlePanel" Grid.Row="0">
-            <TextBox Name="LoginUsernameTextBox" Text="{Binding Username, Mode=TwoWay}"></TextBox>
-            <PasswordBox Name="LoginPasswordTextBox" Password="{Binding Password, Mode=TwoWay}"></PasswordBox>
-            <Button Click="Login_OnClick" Content="Click click !"></Button>
-        </StackPanel>
-
-        <StackPanel Grid.Row="1">
-            <TextBox Name="SignUpUsername1TextBox" Text="{Binding Username1, Mode=TwoWay}"></TextBox>
-            <TextBox Name="SignUpUsername2TextBox" Text="{Binding Username2, Mode=TwoWay}"></TextBox>
-            <PasswordBox Name="SignUpPasswordTextBox" Password="{Binding Password, Mode=TwoWay}"></PasswordBox>
-            <Button Click="SignUp_OnClick" Content="Click click !"></Button>
-        </StackPanel>
-
     </Grid>
 
 </phone:PhoneApplicationPage>

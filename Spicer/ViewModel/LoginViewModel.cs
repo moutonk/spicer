@@ -5,7 +5,7 @@ namespace Spicer.ViewModel
 {
     public sealed class LoginViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        private readonly User _userModel = new User();
+        private readonly UserModel _userModel = new UserModel();
 
         private string _username;
         public string Username

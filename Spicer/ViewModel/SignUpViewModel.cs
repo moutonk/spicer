@@ -5,7 +5,7 @@ namespace Spicer.ViewModel
 {
     public class SignUpViewModel : ViewModelBase, INotifyPropertyChanged
     {
-        private readonly Couple _coupleModel = new Couple();
+        private readonly CoupleModel _coupleModelModel = new CoupleModel();
 
         private string _username1;
         public string Username1
@@ -14,7 +14,7 @@ namespace Spicer.ViewModel
             set
             {
                 NotifyPropertyChanged(ref _username1, value);
-                _coupleModel.User1 = _username1;
+                _coupleModelModel.User1 = _username1;
             }
         }
 
@@ -25,7 +25,7 @@ namespace Spicer.ViewModel
             set
             {
                 NotifyPropertyChanged(ref _username2, value);
-                _coupleModel.User2 = _username2;
+                _coupleModelModel.User2 = _username2;
             }
         }
 
@@ -36,7 +36,7 @@ namespace Spicer.ViewModel
             set
             {
                 NotifyPropertyChanged(ref _password, value);
-                _coupleModel.Password = _password;
+                _coupleModelModel.Password = _password;
             }
         }
 

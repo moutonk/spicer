@@ -7,29 +7,27 @@ using Utils;
 
 namespace Spicer.Model
 {
-    public class Couple
+    public sealed class UserModel
     {
-        public string User1 { get; set; }
-        public string User2 { get; set; }
-        public string Password { get; set; }
+        public string Username {get; set; }
+        public string Password {get; set; }
     }
 
-    public class ServiceCouple : WebServiceEndDetector
+    public class ServiceUser : WebServiceEndDetector
     {
         private readonly WebService _ws = new WebService();
-        private readonly SignUpViewModel _vm;
+        private readonly LoginViewModel _vm;
 
-        public ServiceCouple(SignUpViewModel vm)
+        public ServiceUser(LoginViewModel vm)
         {
             _vm = vm;
         }
 
-        public void SignUpGo(string username1, string username2, string password)
+        public void LoginGo(string username, string password)
         {
-            _ws.SendRequest(HttpMethod.Post, RequestType.Couple, RequestContentType.Text, new Dictionary<string, string>
+            _ws.SendRequest(HttpMethod.Put, RequestType.User, RequestContentType.Text, new Dictionary<string, string>
             {
-                {"user1", username1},
-                {"user2", username2},
+                {"username", username},
                 {"password", password}
             });
             StartTimer();
@@ -42,14 +40,15 @@ namespace Spicer.Model
                 StopTimer();
                 Logs.Output.ShowOutput("REPONSE!: " + _ws.Result);
 
-                if (!string.IsNullOrEmpty(_ws.Result))
+                if (_ws.Error.ErrorCode != null)
+                {
+                    //error
+                }
+                else if (!string.IsNullOrEmpty(_ws.Result))
                 {
                     var obj = JsonConvert.DeserializeObject<BasicResponse>(_ws.Result);
                 }
-
-
-                //_vm.Username1 = "titi1";
-                //_vm.Username2 = "titi2";
+                //_vm.Username = "titi";
                 //_vm.Password = "dsqdqsfsqf";
             }
             else
