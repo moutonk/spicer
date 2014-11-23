@@ -16,7 +16,7 @@
     <StackPanel x:Name="TitlePanel" Grid.Row="0">
         <TextBox Name="LoginUsernameTextBox" Text="{Binding Username, Mode=TwoWay}"></TextBox>
         <PasswordBox Name="LoginPasswordTextBox" Password="{Binding Password, Mode=TwoWay}"></PasswordBox>
-        <Button Click="Login_OnClick" Content="Click click !"></Button>
+        <Button Click="Login_OnClick" Content="{Binding LocalizedResources.Connection, Source={StaticResource LocalizedStrings}}"></Button>
     </StackPanel>
 
 </phone:PhoneApplicationPage>

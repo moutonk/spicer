@@ -12,7 +12,9 @@ namespace Utils
     public enum RequestType
     {
         Couple,
-        User
+        User,
+        Fantasy,
+        FantasySeen
     }
 
     public enum RequestContentType
@@ -72,6 +74,10 @@ namespace Utils
                     return "user/";
                 case RequestType.Couple:
                     return "couple/";
+                case RequestType.Fantasy:
+                    return "fantaisy/";
+                case RequestType.FantasySeen:
+                    return "fantaisySeen/";
                 default:
                     return reqType.ToString();
             }

@@ -7,30 +7,28 @@ using Utils;
 
 namespace Spicer.Model
 {
-    public class CoupleModel
+    public sealed class FantasyModel
     {
-        public string User1 { get; set; }
-        public string User2 { get; set; }
-        public string Password { get; set; }
+        public string Id { get; set; }
+        public string Title { get; set; }
+        public string Url { get; set; }
+        public string ImgUrl { get; set; }
     }
 
-    public class ServiceCouple : WebServiceEndDetector
+    public class FantasyService : WebServiceEndDetector
     {
         private readonly WebService _ws = new WebService();
-        private readonly SignUpViewModel _vm;
+        private readonly FantasyViewModel _vm;
 
-        public ServiceCouple(SignUpViewModel vm)
+        public FantasyService(FantasyViewModel vm)
         {
             _vm = vm;
         }
 
-        public void SignUpGo(string username1, string username2, string password)
+        public void FantasyList()
         {
-            _ws.SendRequest(HttpMethod.Post, RequestType.Couple, RequestContentType.Text, new Dictionary<string, string>
+            _ws.SendRequest(HttpMethod.Get, RequestType.Fantasy, RequestContentType.Text, new Dictionary<string, string>
             {
-                {"user1", username1},
-                {"user2", username2},
-                {"password", password}
             });
             StartTimer();
         }
@@ -41,14 +39,15 @@ namespace Spicer.Model
                 return;
 
             StopTimer();
-            
+            Logs.Output.ShowOutput("REPONSE!: " + _ws.Result);
+
             if (_ws.Error.ErrorCode != null)
             {
                 //error
             }
             else if (!string.IsNullOrEmpty(_ws.Result))
             {
-                var obj = JsonConvert.DeserializeObject<BasicResponse>(_ws.Result);
+                var obj = JsonConvert.DeserializeObject<List<FantasyModel>>(_ws.Result);
             }
         }
     }

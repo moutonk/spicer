@@ -18,7 +18,7 @@
         <TextBox Name="SignUpUsername1TextBox" Text="{Binding Username1, Mode=TwoWay}"></TextBox>
         <TextBox Name="SignUpUsername2TextBox" Text="{Binding Username2, Mode=TwoWay}"></TextBox>
         <PasswordBox Name="SignUpPasswordTextBox" Password="{Binding Password, Mode=TwoWay}"></PasswordBox>
-        <Button Click="SignUp_OnClick" Content="Click click !"></Button>
+        <Button Click="SignUp_OnClick" Content="{Binding LocalizedResources.SignUp, Source={StaticResource LocalizedStrings}}"></Button>
     </StackPanel>
 
 </phone:PhoneApplicationPage>

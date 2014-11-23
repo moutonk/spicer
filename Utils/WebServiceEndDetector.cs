@@ -6,26 +6,23 @@ namespace Utils
 {
     public class WebServiceEndDetector
     {
-        private DispatcherTimer _waitAnswerTimer;
+        private readonly DispatcherTimer _waitAnswerTimer;
 
         protected WebServiceEndDetector()
         {
-            Deployment.Current.Dispatcher.BeginInvoke(() =>
-            {
-                _waitAnswerTimer = new DispatcherTimer();
-                _waitAnswerTimer.Tick += waitEnd_Tick;
-                _waitAnswerTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
-            });
+            _waitAnswerTimer = new DispatcherTimer();
+            _waitAnswerTimer.Tick += waitEnd_Tick;
+            _waitAnswerTimer.Interval = new TimeSpan(0, 0, 0, 0, 200);
          }
 
         protected void StartTimer()
         {
-            Deployment.Current.Dispatcher.BeginInvoke(() => _waitAnswerTimer.Start());
+            _waitAnswerTimer.Start();
         }
 
         protected void StopTimer()
         {
-            Deployment.Current.Dispatcher.BeginInvoke(() => _waitAnswerTimer.Stop());
+            _waitAnswerTimer.Stop();
         }
 
         //function called peridodicaly (and so the overridden function inherited)

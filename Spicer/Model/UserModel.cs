@@ -35,25 +35,18 @@ namespace Spicer.Model
 
         protected override void waitEnd_Tick(object sender, EventArgs e)
         {
-            if (_ws.IsRequestOver)
-            {
-                StopTimer();
-                Logs.Output.ShowOutput("REPONSE!: " + _ws.Result);
+            if (!_ws.IsRequestOver)
+                return;
 
-                if (_ws.Error.ErrorCode != null)
-                {
-                    //error
-                }
-                else if (!string.IsNullOrEmpty(_ws.Result))
-                {
-                    var obj = JsonConvert.DeserializeObject<BasicResponse>(_ws.Result);
-                }
-                //_vm.Username = "titi";
-                //_vm.Password = "dsqdqsfsqf";
-            }
-            else
+            StopTimer();
+
+            if (_ws.Error.ErrorCode != null)
             {
-                Logs.Output.ShowOutput("PAS REPONSE!");
+                //error
+            }
+            else if (!string.IsNullOrEmpty(_ws.Result))
+            {
+                var obj = JsonConvert.DeserializeObject<BasicResponse>(_ws.Result);
             }
         }
     }
