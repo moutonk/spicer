@@ -134,14 +134,14 @@ namespace Utils
             request.BeginGetResponse(new AsyncCallback(ManageResponse), Tuple.Create(request, new byte[1]));
         }
 
-        private void WriteParamsInStreamCallBack(IAsyncResult ar)
+        private async void WriteParamsInStreamCallBack(IAsyncResult ar)
         {
             Logs.Output.ShowOutput("Writing request BEGIN...");
             var tuple = (Tuple<HttpWebRequest, byte[]>)ar.AsyncState;
 
             using (var postStream = tuple.Item1.EndGetRequestStream(ar))
             {
-                postStream.Write(tuple.Item2, 0, tuple.Item2.Length);
+                await postStream.WriteAsync(tuple.Item2, 0, tuple.Item2.Length);
                 postStream.Flush();
             }
 
@@ -188,7 +188,7 @@ namespace Utils
             }
         }
 
-        private void ManageResponse(IAsyncResult ar)
+        private async void ManageResponse(IAsyncResult ar)
         {
             Logs.Output.ShowOutput("Waiting answer BEGIN...");
             var tuple = (Tuple<HttpWebRequest, byte[]>)ar.AsyncState;
@@ -199,15 +199,14 @@ namespace Utils
                 using (var streamResponse = response.GetResponseStream())
                 using (var streamRead = new StreamReader(streamResponse))
                 {
-                    var responseString = streamRead.ReadToEnd();
+                    var responseString = streamRead.ReadToEndAsync();
+                    
                     _cookieColl = response.Cookies;
-
                     if (response.Cookies != null)
                         ShowCookiesInfos(response);
 
-                    Logs.Output.ShowOutput("Answer: " + responseString);
-
-                    Result = responseString;
+                    Result = await responseString;
+                    Logs.Output.ShowOutput("Answer: " + Result);
 
                     //DataConverter.ParseJson(responseString, (RequestType) tuple.Item3);
                 }
