@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using Windows.Web.Http;
 
@@ -14,6 +15,7 @@ namespace Utils
         Couple,
         User,
         Fantasy,
+        FantasyId,
         FantasySeen
     }
 
@@ -47,16 +49,18 @@ namespace Utils
             IsRequestOver = false;
         }
 
-        public void SendRequest(HttpMethod httpReqType, RequestType reqType, RequestContentType reqContentType, Dictionary<string, string> args)
+        public void SendRequest(HttpMethod httpReqType,
+                                RequestType reqType, RequestContentType reqContentType,
+                                Dictionary<string, string> currentArgs, List<string> rareArgs = null)
         {
             ReqType = reqType;
             ReqContentType = reqContentType;
             HttpReqType = httpReqType;
 
-            Logs.Output.ShowOutput(Environment.NewLine + "SendRequest: " + httpReqType + " " + reqType + " " + args.Aggregate("",(current, keyValuePair) =>current + ("[" + keyValuePair.Key + " " + keyValuePair.Value + "]")));
-            
-            var dicoToString = FormateDictionnaryToString(args);
-            var url = Paths.ServerAddress + RequestTypeToUrlString(reqType);
+            Logs.Output.ShowOutput(Environment.NewLine + "SendRequest: " + httpReqType + " " + reqType + " " + currentArgs.Aggregate("", (current, keyValuePair) => current + ("[" + keyValuePair.Key + " " + keyValuePair.Value + "]")));
+
+            var dicoToString = FormateDictionnaryToString(currentArgs);
+            var url = Paths.ServerAddress + RequestTypeToUrlString(reqType, rareArgs);
 
             if (httpReqType == HttpMethod.Post)
                 PostPutRequest(ref url, ref dicoToString);
@@ -65,8 +69,8 @@ namespace Utils
             else if (httpReqType == HttpMethod.Get)
                 GetRequest(ref url, ref dicoToString);
         }
-     
-        private static string RequestTypeToUrlString(RequestType reqType)
+
+        private static string RequestTypeToUrlString(RequestType reqType, IReadOnlyList<string> rareArgs)
         {
             switch (reqType)
             {
@@ -76,6 +80,8 @@ namespace Utils
                     return "couple/";
                 case RequestType.Fantasy:
                     return "fantaisy/";
+                case RequestType.FantasyId:
+                    return string.Format("fantaisy/{0}/", rareArgs[0]);
                 case RequestType.FantasySeen:
                     return "fantaisySeen/";
                 default:
@@ -195,12 +201,12 @@ namespace Utils
 
             try
             {
-                using (var response = (HttpWebResponse)tuple.Item1.EndGetResponse(ar))
+                using (var response = (HttpWebResponse) tuple.Item1.EndGetResponse(ar))
                 using (var streamResponse = response.GetResponseStream())
                 using (var streamRead = new StreamReader(streamResponse))
                 {
                     var responseString = streamRead.ReadToEndAsync();
-                    
+
                     _cookieColl = response.Cookies;
                     if (response.Cookies != null)
                         ShowCookiesInfos(response);
@@ -215,8 +221,11 @@ namespace Utils
             {
                 ManageResponseExplicitError(e);
             }
-            Logs.Output.ShowOutput("Waiting answer END...");
-            IsRequestOver = true;
+            finally
+            {
+                Logs.Output.ShowOutput("Waiting answer END...");
+                IsRequestOver = true;
+            }
         }
 
         private void ManageResponseExplicitError(WebException e)

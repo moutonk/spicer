@@ -94,6 +94,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\BasicResponse.cs" />
     <Compile Include="Model\CoupleModel.cs" />
     <Compile Include="Model\FantasyModel.cs" />

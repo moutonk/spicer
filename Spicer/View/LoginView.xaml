@@ -17,6 +17,7 @@
         <TextBox Name="LoginUsernameTextBox" Text="{Binding Username, Mode=TwoWay}"></TextBox>
         <PasswordBox Name="LoginPasswordTextBox" Password="{Binding Password, Mode=TwoWay}"></PasswordBox>
         <Button Click="Login_OnClick" Content="{Binding LocalizedResources.Connection, Source={StaticResource LocalizedStrings}}"></Button>
+        <Button Click="Test" Content="Test"></Button>
     </StackPanel>
 
 </phone:PhoneApplicationPage>

@@ -7,11 +7,16 @@ using Utils;
 
 namespace Spicer.Model
 {
-    public class CoupleModel
+    public class CoupleModel : BaseModel
     {
         public string User1 { get; set; }
         public string User2 { get; set; }
         public string Password { get; set; }
+
+        public void Print()
+        {
+            Print(this);
+        }
     }
 
     public class ServiceCouple : WebServiceEndDetector

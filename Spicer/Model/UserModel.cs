@@ -7,10 +7,15 @@ using Utils;
 
 namespace Spicer.Model
 {
-    public sealed class UserModel
+    public sealed class UserModel : BaseModel
     {
         public string Username {get; set; }
         public string Password {get; set; }
+
+        public void Print()
+        {
+            Print(this);
+        }
     }
 
     public class ServiceUser : WebServiceEndDetector

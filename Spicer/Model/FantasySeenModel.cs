@@ -7,10 +7,15 @@ using Utils;
 
 namespace Spicer.Model
 {
-    public sealed class FantasySeenModel
+    public sealed class FantasySeenModel : BaseModel
     {
         public string Id { get; set; }
         public bool Status { get; set; }
+
+        public void Print()
+        {
+            Print(this);
+        }
     }
 
     public class FantasySeenService : WebServiceEndDetector
@@ -58,6 +63,7 @@ namespace Spicer.Model
             else if (!string.IsNullOrEmpty(_ws.Result))
             {
                 var obj = JsonConvert.DeserializeObject<FantasyModel>(_ws.Result);
+                obj.Print();
             }
         }
     }

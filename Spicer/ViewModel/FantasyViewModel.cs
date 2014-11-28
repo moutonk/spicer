@@ -34,5 +34,11 @@ namespace Spicer.ViewModel
             var wsF = new FantasyService(this);
             wsF.FantasyList();
         }
+
+        public void FantasyId(string id)
+        {
+            var wsF = new FantasyService(this);
+            wsF.FantasyId(id);
+        }
     }
 }

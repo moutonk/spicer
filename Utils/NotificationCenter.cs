@@ -13,7 +13,7 @@ namespace Utils
         private static readonly HttpNotificationChannel PushChannel;
 
         public static string PushChannelUri { get; set; }
-        private const string ChannelName = "ToastChannel";
+        private static readonly string ChannelName = "ToastChannel" + All.GetPhoneUniqueId();
 
         //call static constructor
         public static void Start() {}

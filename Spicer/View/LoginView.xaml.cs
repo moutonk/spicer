@@ -17,5 +17,11 @@ namespace Spicer.View
         {
             (DataContext as LoginViewModel).LoginGo();
         }
+
+        private void Test(object sender, RoutedEventArgs e)
+        {
+            var t = new FantasyViewModel();
+            t.FantasyId("1");
+        }
     }
 }
