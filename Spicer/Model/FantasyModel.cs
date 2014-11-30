@@ -31,7 +31,7 @@ namespace Spicer.Model
             _vm = vm;
         }
 
-        public void FantasyList()
+        public void GetFantasyList()
         {
             _requestType = RequestType.Fantasy;
             _ws.SendRequest(HttpMethod.Get, RequestType.Fantasy, RequestContentType.Text, new Dictionary<string, string>
@@ -40,7 +40,7 @@ namespace Spicer.Model
             StartTimer();
         }
 
-        public void FantasyId(string fantasyId)
+        public void GetFantasyId(string fantasyId)
         {
             _requestType = RequestType.FantasyId;
             _ws.SendRequest(HttpMethod.Get, RequestType.FantasyId, RequestContentType.Text, new Dictionary<string, string>(), new List<string>

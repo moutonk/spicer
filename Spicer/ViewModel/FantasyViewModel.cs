@@ -7,38 +7,38 @@ namespace Spicer.ViewModel
     {
         private readonly FantasyModel _fantasyModel = new FantasyModel();
 
-        //private string _username;
-        //public string Username
-        //{
-        //    get { return _username; }
-        //    set
-        //    {
-        //        NotifyPropertyChanged(ref _username, value);
-        //        _fantasyModel.Username = _username;
-        //    }
-        //}
-
-        //private string _password;
-        //public string Password
-        //{
-        //    get { return _password; }
-        //    set
-        //    {
-        //        NotifyPropertyChanged(ref _password, value);
-        //        _fantasyModel.Password = _password;
-        //    }
-        //}
-
-        public void FantasyList()
+        private string _title;
+        public string Title
         {
-            var wsF = new FantasyService(this);
-            wsF.FantasyList();
+            get { return _title; }
+            set
+            {
+                NotifyPropertyChanged(ref _title, value);
+                _fantasyModel.Title = _title;
+            }
         }
 
-        public void FantasyId(string id)
+        private string _imgUrl;
+        public string ImgUrl
+        {
+            get { return _imgUrl; }
+            set
+            {
+                NotifyPropertyChanged(ref _imgUrl, value);
+                _fantasyModel.ImgUrl = _imgUrl;
+            }
+        }
+
+        public void GetFantasyList()
         {
             var wsF = new FantasyService(this);
-            wsF.FantasyId(id);
+            wsF.GetFantasyList();
+        }
+
+        public void GetFantasyId(string id)
+        {
+            var wsF = new FantasyService(this);
+            wsF.GetFantasyId(id);
         }
     }
 }

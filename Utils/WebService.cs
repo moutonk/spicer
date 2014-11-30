@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using Windows.Web.Http;
 
@@ -35,32 +34,31 @@ namespace Utils
     {
         private CookieCollection _cookieColl = new CookieCollection();
         private readonly CookieContainer _cookieContainer = new CookieContainer();
+        
         public string Result { get; private set; }
         public bool IsRequestOver { get; private set; }
-        public WebServiceError Error = new WebServiceError {ErrorCode = null};
-
-        public RequestType ReqType { get; set; }
-        public RequestContentType ReqContentType { get; set; }
-        public HttpMethod HttpReqType { get; set; }
+        public WebServiceError Error { get; private set; }
+        public RequestType ReqType { get; private set; }
+        public RequestContentType ReqContentType { get; private set; }
+        public HttpMethod HttpReqType { get; private set; }
 
         public WebService()
         {
             Result = null;
             IsRequestOver = false;
+            Error = new WebServiceError { ErrorCode = null };
         }
 
-        public void SendRequest(HttpMethod httpReqType,
-                                RequestType reqType, RequestContentType reqContentType,
-                                Dictionary<string, string> currentArgs, List<string> rareArgs = null)
+        public void SendRequest(HttpMethod httpReqType, RequestType reqType, RequestContentType reqContentType, Dictionary<string, string> bodyArgs, List<string> urlArgs = null)
         {
             ReqType = reqType;
             ReqContentType = reqContentType;
             HttpReqType = httpReqType;
 
-            Logs.Output.ShowOutput(Environment.NewLine + "SendRequest: " + httpReqType + " " + reqType + " " + currentArgs.Aggregate("", (current, keyValuePair) => current + ("[" + keyValuePair.Key + " " + keyValuePair.Value + "]")));
+            Logs.Output.ShowOutput(Environment.NewLine + "SendRequest: " + httpReqType + " " + reqType + " " + bodyArgs.Aggregate("", (current, keyValuePair) => current + ("[" + keyValuePair.Key + " " + keyValuePair.Value + "]")));
 
-            var dicoToString = FormateDictionnaryToString(currentArgs);
-            var url = Paths.ServerAddress + RequestTypeToUrlString(reqType, rareArgs);
+            var dicoToString = FormateDictionnaryToString(bodyArgs);
+            var url = Paths.ServerAddress + RequestTypeToUrlString(reqType, urlArgs);
 
             if (httpReqType == HttpMethod.Post)
                 PostPutRequest(ref url, ref dicoToString);
@@ -92,15 +90,12 @@ namespace Utils
         private void PostPutRequest(ref string url, ref string parameters)
         {
             var request = (HttpWebRequest)WebRequest.Create(url);
+            byte[] requestParams = null;
 
             Logs.Output.ShowOutput(url + " " + parameters);
-
             _cookieContainer.Add(new Uri(Paths.ServerAddress), _cookieColl);
-
             request.CookieContainer = _cookieContainer;
             request.Method = HttpReqType.ToString();
-
-            byte[] requestParams = null;
 
             switch (ReqContentType)
             {
@@ -171,7 +166,7 @@ namespace Utils
             return builder.ToString();
         }
 
-        private void ShowCookiesInfos(HttpWebResponse response)
+        private static void ShowCookiesInfos(HttpWebResponse response)
         {
             foreach (Cookie cook in response.Cookies)
             {
@@ -181,15 +176,12 @@ namespace Utils
                 Logs.Output.ShowOutput("Path: " + cook.Path);
                 Logs.Output.ShowOutput("Port: " + cook.Port);
                 Logs.Output.ShowOutput("Secure: " + cook.Secure);
-
                 Logs.Output.ShowOutput("When issued:" + cook.TimeStamp);
                 Logs.Output.ShowOutput("Expires: (expired?)" + cook.Expires + " " + cook.Expired);
                 Logs.Output.ShowOutput("Don't save:" + cook.Discard);
                 Logs.Output.ShowOutput("Comment: " + cook.Comment);
                 Logs.Output.ShowOutput("Uri for comments: " + cook.CommentUri);
                 Logs.Output.ShowOutput("Version: RFC " + (cook.Version == 1 ? "2109" : "2965"));
-
-                // Show the string representation of the cookie.
                 Logs.Output.ShowOutput("String: " + cook.ToString());
             }
         }
@@ -213,8 +205,6 @@ namespace Utils
 
                     Result = await responseString;
                     Logs.Output.ShowOutput("Answer: " + Result);
-
-                    //DataConverter.ParseJson(responseString, (RequestType) tuple.Item3);
                 }
             }
             catch (WebException e)
@@ -233,15 +223,15 @@ namespace Utils
             Logs.Output.ShowOutput("GetResponseCallback: " + e.Message + ": " + e.InnerException.Message);
             var aResp = e.Response as HttpWebResponse;
 
-            if (aResp != null)
+            if (aResp == null)
+                return;
+
+            Logs.Output.ShowOutput("statusCode: " + (int)aResp.StatusCode);
+            Error.ErrorCode = aResp.StatusCode;
+            Error.CodeDescription = aResp.StatusDescription;
+            using (var reader = new StreamReader(aResp.GetResponseStream()))
             {
-                Logs.Output.ShowOutput("statusCode: " + (int)aResp.StatusCode);
-                Error.ErrorCode = aResp.StatusCode;
-                Error.CodeDescription = aResp.StatusDescription;
-                using (var reader = new StreamReader(aResp.GetResponseStream()))
-                {
-                    Logs.Output.ShowOutput(reader.ReadToEnd());
-                }
+                Logs.Output.ShowOutput(reader.ReadToEnd());
             }
         }
 
