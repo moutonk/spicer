@@ -18,6 +18,16 @@ namespace Spicer.Model
         }
     }
 
+    public sealed class LoginResponseModel : BaseModel
+    {
+        public string Token { get; set; }
+
+        public void Print()
+        {
+            Print(this);
+        }
+    }
+
     public class ServiceUser : WebServiceEndDetector
     {
         private readonly WebService _ws = new WebService();
@@ -30,10 +40,11 @@ namespace Spicer.Model
 
         public void LoginGo(string username, string password)
         {
-            _ws.SendRequest(HttpMethod.Put, RequestType.User, RequestContentType.Text, new Dictionary<string, string>
+            _ws.SendRequest(HttpMethod.Post, RequestType.User, RequestContentType.Text, new Dictionary<string, string>
             {
                 {"username", username},
-                {"password", password}
+                {"password", password},
+                {"plateform", "wp"}
             });
             StartTimer();
         }
@@ -47,11 +58,14 @@ namespace Spicer.Model
 
             if (_ws.Error.ErrorCode != null)
             {
-                //error
+                Logs.Output.ShowOutput(((int)_ws.Error.ErrorCode.Value).ToString());
+                Logs.Output.ShowOutput(_ws.Error.CodeDescription);
             }
             else if (!string.IsNullOrEmpty(_ws.Result))
             {
-                var obj = JsonConvert.DeserializeObject<BasicResponse>(_ws.Result);
+                var res = JsonConvert.DeserializeObject<LoginResponseModel>(_ws.Result);
+
+                Data.Token = res.Token;
             }
         }
     }

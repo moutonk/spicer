@@ -1,14 +1,12 @@
-﻿using System.ComponentModel;
-
-namespace Utils
+﻿namespace Utils
 {
     public static class Data
     {
-        [DefaultValue(false)] public static bool NetworkProblem { get; set; }
+        public static string Token { get; set; }
 
         static Data()
         {
-         
+            Token = null;
         }
 
         public enum StoredDataType

@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Connection" xml:space="preserve">
+    <value>Connexion</value>
+  </data>
+  <data name="SignUp" xml:space="preserve">
+    <value>Sign up</value>
+  </data>
   <data name="ResourceFlowDirection" xml:space="preserve">
     <value>LeftToRight</value>
     <comment>Controls the FlowDirection for all elements in the RootFrame. Set to the traditional direction of this resource file's language</comment>
@@ -124,20 +130,5 @@
   <data name="ResourceLanguage" xml:space="preserve">
     <value>fr-FR</value>
     <comment>Controls the Language and ensures that the font for all elements in the RootFrame aligns with the app's language. Set to the language code of this resource file's language.</comment>
-  </data>
-  <data name="ApplicationTitle" xml:space="preserve">
-    <value>MON APPLICATION</value>
-  </data>
-  <data name="AppBarMenuItemText" xml:space="preserve">
-    <value>Élément de menu</value>
-  </data>
-  <data name="AppBarButtonText" xml:space="preserve">
-    <value>ajouter</value>
-  </data>
-  <data name="Connection" xml:space="preserve">
-    <value>Connexion</value>
-  </data>
-  <data name="SignUp" xml:space="preserve">
-    <value>Sign up</value>
   </data>
 </root>

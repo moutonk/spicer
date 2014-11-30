@@ -87,14 +87,22 @@ namespace Utils
             }
         }
 
+        private void AddCookies(HttpWebRequest request)
+        {
+            if (Data.Token != null)
+                _cookieColl.Add(new Cookie { Name = "Token", Value = Data.Token });
+            _cookieContainer.Add(new Uri(Paths.ServerAddress), _cookieColl);
+            request.CookieContainer = _cookieContainer;
+        }
+
         private void PostPutRequest(ref string url, ref string parameters)
         {
             var request = (HttpWebRequest)WebRequest.Create(url);
             byte[] requestParams = null;
-
+            
             Logs.Output.ShowOutput(url + " " + parameters);
-            _cookieContainer.Add(new Uri(Paths.ServerAddress), _cookieColl);
-            request.CookieContainer = _cookieContainer;
+
+            AddCookies(request);
             request.Method = HttpReqType.ToString();
 
             switch (ReqContentType)
@@ -126,12 +134,10 @@ namespace Utils
         {
             var request = (HttpWebRequest)WebRequest.Create(url + "?" + parameters);
 
-            _cookieContainer.Add(new Uri(Paths.ServerAddress), _cookieColl);
-
-            request.CookieContainer = _cookieContainer;
             Logs.Output.ShowOutput(url + "?" + parameters);
-            request.Method = HttpMethod.Get.ToString();
 
+            AddCookies(request);
+            request.Method = HttpReqType.ToString();
             request.BeginGetResponse(new AsyncCallback(ManageResponse), Tuple.Create(request, new byte[1]));
         }
 

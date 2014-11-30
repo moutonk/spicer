@@ -60,7 +60,8 @@ namespace Spicer.Model
 
             if (_ws.Error.ErrorCode != null)
             {
-                //error
+                Logs.Output.ShowOutput(((int)_ws.Error.ErrorCode.Value).ToString());
+                Logs.Output.ShowOutput(_ws.Error.CodeDescription);
             }
             else if (!string.IsNullOrEmpty(_ws.Result))
             {

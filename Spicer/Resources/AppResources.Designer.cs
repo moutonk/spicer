@@ -61,33 +61,6 @@ namespace Spicer.Resources {
         }
         
         /// <summary>
-        ///   Recherche une chaîne localisée semblable à ajouter.
-        /// </summary>
-        public static string AppBarButtonText {
-            get {
-                return ResourceManager.GetString("AppBarButtonText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à Élément de menu.
-        /// </summary>
-        public static string AppBarMenuItemText {
-            get {
-                return ResourceManager.GetString("AppBarMenuItemText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Recherche une chaîne localisée semblable à MON APPLICATION.
-        /// </summary>
-        public static string ApplicationTitle {
-            get {
-                return ResourceManager.GetString("ApplicationTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Recherche une chaîne localisée semblable à Connexion.
         /// </summary>
         public static string Connection {
