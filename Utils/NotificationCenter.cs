@@ -72,7 +72,7 @@ namespace Utils
                 Logs.Output.ShowOutput(exp.Message + " " + exp.InnerException);
             }
        
-            Logs.Output.ShowOutput("ChannelUri: " + e.ChannelUri);
+            Logs.Output.ShowOutput("ChannelUri:     " + e.ChannelUri);
             Logs.Output.ShowOutput("PushChannelUri: " + PushChannelUri);
         }
 
@@ -85,6 +85,10 @@ namespace Utils
         static void PushChannel_ShellToastNotificationReceived(object sender, NotificationEventArgs e)
         {
             Logs.Output.ShowOutput("Notification received: " + DateTime.Now.TimeOfDay);
+            foreach (string key in e.Collection.Keys)
+            {
+                Logs.Output.ShowOutput(String.Format("{0}: {1}", key, e.Collection[key]));
+            }
         }
     }
 }

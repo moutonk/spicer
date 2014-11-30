@@ -12,6 +12,7 @@ namespace Spicer.View
         public StartPage()
         {
             InitializeComponent();
+            NotificationCenter.Start();
         }
 
         private void ConnectButton_OnClick(object sender, RoutedEventArgs e)
