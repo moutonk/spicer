@@ -93,6 +93,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data.cs" />
     <Compile Include="LocalizedStrings.cs" />
     <Compile Include="Model\BaseModel.cs" />
     <Compile Include="Model\BasicResponse.cs" />
@@ -186,6 +187,12 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.3.0\lib\wp8\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.WP8">
+      <HintPath>..\packages\AutoMapper.3.3.0\lib\wp8\AutoMapper.WP8.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Phone.Controls.Toolkit">
       <HintPath>..\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
@@ -210,4 +217,5 @@
   </Target>
   -->
   <ProjectExtensions />
+  <Import Project="..\packages\AutoMapper.3.3.0\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.0\tools\AutoMapper.targets')" />
 </Project>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Windows.Web.Http;
+using AutoMapper;
 using Newtonsoft.Json;
 using Spicer.ViewModel;
 using Utils;
@@ -75,6 +76,7 @@ namespace Spicer.Model
                     case RequestType.FantasyId:
                         var fantasy = JsonConvert.DeserializeObject<FantasyModel>(_ws.Result);
                         fantasy.Print();
+                        Mapper.DynamicMap(fantasy, _vm); // A TESTER
                         break;
                 }
             }
