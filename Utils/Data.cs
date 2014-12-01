@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-
-namespace Utils
+﻿namespace Utils
 {
     public static class Data
     {
@@ -9,8 +7,6 @@ namespace Utils
         static Data()
         {
             Token = null;
-
-            Mapper.CreateMap(Spicer.Model.UserModel, )
         }
 
         public enum StoredDataType

@@ -13,6 +13,7 @@ namespace Spicer.View
         {
             InitializeComponent();
             NotificationCenter.Start();
+            DataHelper.Start();
         }
 
         private void ConnectButton_OnClick(object sender, RoutedEventArgs e)

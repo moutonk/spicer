@@ -19,9 +19,12 @@
     <File>AppManifest.xaml</File>
     <File>Assets\ApplicationIcon.png</File>
     <File>Assets\Tiles\FlipCycleTileMedium.png</File>
+    <File>AutoMapper.WP8.dll</File>
+    <File Type="PCL">AutoMapper.dll</File>
     <File>Microsoft.Phone.Controls.Toolkit.dll</File>
     <File Type="PCL">Newtonsoft.Json.dll</File>
     <File>Utils.dll</File>
+    <File>AutoMapper.xml</File>
     <File>Newtonsoft.Json.xml</File>
     <File>WMAppManifest.xml</File>
     <File>AppxManifest.xml</File>

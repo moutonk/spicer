@@ -22,6 +22,12 @@
     <AppxPackagedFile Include="C:\Users\mouton_k\Documents\GitHub\spicer\Utils\Bin\Debug\Utils.dll">
       <PackagePath>Utils.dll</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\mouton_k\Documents\GitHub\spicer\packages\AutoMapper.3.3.0\lib\wp8\AutoMapper.dll">
+      <PackagePath>AutoMapper.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\mouton_k\Documents\GitHub\spicer\packages\AutoMapper.3.3.0\lib\wp8\AutoMapper.WP8.dll">
+      <PackagePath>AutoMapper.WP8.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\mouton_k\Documents\GitHub\spicer\packages\WPtoolkit.4.2013.08.16\lib\wp8\Microsoft.Phone.Controls.Toolkit.dll">
       <PackagePath>Microsoft.Phone.Controls.Toolkit.dll</PackagePath>
     </AppxPackagedFile>
@@ -177,6 +183,9 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\mouton_k\Documents\GitHub\spicer\packages\WPtoolkit.4.2013.08.16\lib\wp8\zh-TW\Microsoft.Phone.Controls.Toolkit.resources.dll">
       <PackagePath>zh-TW\Microsoft.Phone.Controls.Toolkit.resources.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\mouton_k\Documents\GitHub\spicer\packages\AutoMapper.3.3.0\lib\wp8\AutoMapper.xml">
+      <PackagePath>AutoMapper.xml</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\mouton_k\Documents\GitHub\spicer\packages\Newtonsoft.Json.6.0.6\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.xml">
       <PackagePath>Newtonsoft.Json.xml</PackagePath>

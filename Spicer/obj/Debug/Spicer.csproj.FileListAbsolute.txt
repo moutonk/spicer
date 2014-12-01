@@ -188,3 +188,6 @@ C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\XapCacheFile.xml
 C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\View\StartPage.g.cs
 C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\View\LoginView.g.cs
 C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\obj\Debug\View\SignUpView.g.cs
+C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\Bin\Debug\AutoMapper.WP8.dll
+C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\Bin\Debug\AutoMapper.dll
+C:\Users\mouton_k\Documents\GitHub\spicer\Spicer\Bin\Debug\AutoMapper.xml
